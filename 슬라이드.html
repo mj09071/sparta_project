@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:float="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>all-barn | 4조</title>
+    <style>
+        /*<!--스크롤 없애고 우측 닷 3개 달기-->*/
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            color: #ffffff;
+        }
+
+        .slide-img {
+            width: 100%;
+        }
+
+        @keyframes fade_in {
+            0% {
+                opacity: 0;
+                left: 40%;
+            }
+            100% {
+                opacity: 1;
+                left: 50%;
+            }
+        }
+
+        .img-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /*box 디브에 쌓여있어서..우측 바닥에 붙이기*/
+        .veget-text {
+            text-align: right;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+
+        table {
+            background-color: white;
+        }
+
+        /*th {*/
+        /*  text-align: left;*/
+        /*  color: blue;*/
+        /*}*/
+        td {
+            vertical-align: top;
+        }
+
+        /*왼쪽이미지 가운데 위치*/
+        .shop-button {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /*오른쪽 이미지 가운데 위치*/
+        .products-button {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+    </style>
+
+    <script>
+        window.onload = function () {
+            $('.box').eq(0).addClass('move');
+            var elm = ".box";
+            $(elm).each(function (index) {
+                // 개별적으로 Wheel 이벤트 적용
+                $(this).on("mousewheel DOMMouseScroll", function (e) {
+                    e.preventDefault();
+                    var delta = 0;
+                    if (!event) event = window.event;
+                    if (event.wheelDelta) {
+                        delta = event.wheelDelta / 120;
+                        if (window.opera) delta = -delta;
+                    } else if (event.detail)
+                        delta = -event.detail / 3;
+                    var moveTop = $(window).scrollTop();
+                    var elmSelecter = $(elm).eq(index);
+                    // 마우스휠을 위에서 아래로
+                    if (delta < 0) {
+                        if ($(elmSelecter).next() != undefined) {
+                            try {
+                                moveTop = $(elmSelecter).next().offset().top;
+                                $(elmSelecter).next().addClass('move'); //  휠 내렸을시 애니메이션 이벤트
+                            } catch (e) {
+                            }
+                        }
+                        // 마우스휠을 아래에서 위로
+                    } else {
+                        if ($(elmSelecter).prev() != undefined) {
+                            try {
+                                moveTop = $(elmSelecter).prev().offset().top;
+
+                            } catch (e) {
+                            }
+                        }
+                    }
+
+                    // 화면 이동 0.8초(800)
+                    $("html,body").stop().animate({
+                        scrollTop: moveTop + 'px'
+                    }, {
+                        duration: 800, complete: function () {
+                        }
+                    });
+                });
+            });
+
+            $(window).resize(function () {
+                $('.box').css('height', $(window).height());
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+<!--어원만 우측 하단으로 넣고싶어요-->
+<div class="box">
+    <img src="https://media.vlpt.us/images/mjfrontend/post/d8b7a6c6-11c0-4559-bcae-a50342246833/erol-ahmed-wKTF65TcReY-unsplash%20(1).jpg"
+         alt="이미지1"
+         class="slide-img">
+    <div class="img-text">
+        <p>
+        <h1>'풀 먹는게 비건이 아니에요'</h1></p>
+        <button type="button" class="btn btn-secondary btn-lg ">MORE</button>
+    </div>
+    <!--어원만 box밖으로 빼서 이미지의 오른쪽 하단 정렬-->
+    <div class="veget-text">
+        <p>
+        <h4>Veget의 어원: </h4></p>
+        <h4>라틴어 Vegetus에서 유래.</h4>
+        <h4>Vigorous(원기 왕성한). Energetic(정력적인)</h4>
+        <h4>Lively(생기에 넘친). Move(움직이다). Excite(일으키다)</h4>
+    </div>
+</div>
+<div class="box">
+    <!-- 이미지 2장 50:50 넣는 방법 -->
+    <table>
+        <tr>
+            <td><img
+                    src="https://media.vlpt.us/images/mjfrontend/post/dc753ce1-afac-4246-a1c6-4af8a72de601/heather-ford-_U4F6pyOQRs-unsplash.jpg"
+                    alt="이미지2"
+                    class="slide-img"/>
+                <button type="button" class="btn btn-secondary btn-lg shop-button">SHOP</button>
+            </td>
+            <td><img
+                    src="https://media.vlpt.us/images/mjfrontend/post/3beb1a67-be02-4634-aca9-b344de1d19e3/s-o-c-i-a-l-c-u-t-7QjF0V8NOms-unsplash.jpg"
+                    alt="이미지2"
+                    class="slide-img"/>
+                <button type="button" class="btn btn-secondary btn-lg shop-button">products</button>
+            </td>
+        <tr>
+    </table>
+
+    <!--text는 한 가운데/ 버튼만 각 이미지의 가운데?-->
+    <div class="img-text">
+        <p>
+        <h1 style="color: black">넓고 유연한 채식생활</h1></p>
+        <p>
+        <h1 style="color: black">'플렉시테리언(flexible+vegetarian)'</h1></p>
+        <button type="button" class="btn btn-secondary btn-lg ">SHOP</button>
+        <button type="button" class="btn btn-secondary btn-lg ">PRODUCTS</button>
+    </div>
+</div>
+<!--휠 굴렸을때 마지막장 끝까지 안보이는거 해결 (사진 축소?)-->
+<div class="box"><img
+        src="https://images.unsplash.com/photo-1569420077790-afb136b3bb8c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1067&q=80"
+        alt="이미지3" class="slide-img">
+    <div class="img-text">
+        <p>
+        <h1>나와 지구를 살리는 비건 라이프의 시-작</h1></p>
+        <p>
+        <h1>"flexible+vegetarian"</h1></p>
+        <button type="button" class="btn btn-secondary btn-lg ">NEWS</button>
+    </div>
+</div>
+</body>
+
+</html>
